@@ -1,0 +1,3 @@
+curl -X 'GET' \
+  'http://localhost:8080/api/hosts/groups?search=100' \
+  -H 'accept: */*'
