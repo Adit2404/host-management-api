@@ -405,6 +405,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- Your Name - [GitHub Profile](https://github.com/Adit2404)
+[GitHub Profile](https://github.com/Adit2404)
 
 **Built with ❤️ using Spring Boot**
