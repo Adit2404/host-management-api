@@ -1,5 +1,5 @@
-# Backend Dockerfile
-FROM maven:3.8.6-openjdk-11-slim AS build
+# Backend Dockerfile for Java 21
+FROM eclipse-temurin:21-jdk-alpine AS build
 
 WORKDIR /app
 
@@ -11,8 +11,8 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Runtime stage
-FROM openjdk:11-jre-slim
+# Runtime stage with Java 21
+FROM eclipse-temurin:21-jre-alpine
 
 WORKDIR /app
 

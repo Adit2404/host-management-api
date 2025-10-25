@@ -1,9 +1,9 @@
 package com.hostmanagement.repo;
 
 import com.hostmanagement.model.Host;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,41 +16,43 @@ import java.util.concurrent.ConcurrentHashMap;
 public class HostRepository {
 
     private final Map<String, Host> hosts = new ConcurrentHashMap<>();
-
+    private static final String HOST_OS = "Ubuntu 22.04";
+    private static final String HOST_IP = "192.168.1.10";
+    private static final String HOST_PROTOCOL = "HTTPS";
+    private static final String HOST_ROLE_WS = "web_server";
     /**
      * Initializes the repository with sample data
      */
     @PostConstruct
     public void initializeData() {
-        // Similar hosts - Web servers
-        saveInitial(Host.builder()
+      saveInitial(Host.builder()
                 .id(UUID.randomUUID().toString())
-                .ipAddress("192.168.1.10")
+                .ipAddress(HOST_IP)
                 .names(new HashSet<>(Arrays.asList("web01.example.com", "www.example.com")))
-                .roles(new HashSet<>(Arrays.asList("web_server", "application_server")))
-                .protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS", "SSH")))
-                .os("Ubuntu 22.04")
+                .roles(new HashSet<>(Arrays.asList(HOST_ROLE_WS, "application_server")))
+                .protocols(new HashSet<>(Arrays.asList("HTTP", HOST_PROTOCOL, "SSH")))
+                .os(HOST_OS)
                 .createdAt(LocalDateTime.now().minusDays(5))
                 .consolidated(false)
                 .build());
 
         saveInitial(Host.builder()
                 .id(UUID.randomUUID().toString())
-                .ipAddress("192.168.1.10")
+                .ipAddress(HOST_IP)
                 .names(new HashSet<>(Arrays.asList("web01.example.com", "api.example.com")))
-                .roles(new HashSet<>(Arrays.asList("web_server", "api_server")))
-                .protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS")))
-                .os("Ubuntu 22.04")
+                .roles(new HashSet<>(Arrays.asList(HOST_ROLE_WS, "api_server")))
+                .protocols(new HashSet<>(Arrays.asList("HTTP", HOST_PROTOCOL)))
+                .os(HOST_OS)
                 .createdAt(LocalDateTime.now().minusDays(3))
                 .consolidated(false)
                 .build());
 
         saveInitial(Host.builder()
                 .id(UUID.randomUUID().toString())
-                .ipAddress("192.168.1.10")
+                .ipAddress(HOST_IP)
                 .names(new HashSet<>(Collections.singletonList("www.example.com")))
-                .roles(new HashSet<>(Collections.singletonList("web_server")))
-                .protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS", "FTP")))
+                .roles(new HashSet<>(Collections.singletonList(HOST_ROLE_WS)))
+                .protocols(new HashSet<>(Arrays.asList("HTTP", HOST_PROTOCOL, "FTP")))
                 .os("Ubuntu 22")
                 .createdAt(LocalDateTime.now().minusDays(1))
                 .consolidated(false)
@@ -133,8 +135,8 @@ public class HostRepository {
                 .ipAddress("192.168.1.100")
                 .names(new HashSet<>(Arrays.asList("app01.example.com", "application.example.com")))
                 .roles(new HashSet<>(Arrays.asList("application_server", "backend_server")))
-                .protocols(new HashSet<>(Arrays.asList("HTTP", "HTTPS", "gRPC")))
-                .os("Ubuntu 22.04")
+                .protocols(new HashSet<>(Arrays.asList("HTTP", HOST_PROTOCOL, "gRPC")))
+                .os(HOST_OS)
                 .createdAt(LocalDateTime.now().minusDays(15))
                 .consolidated(true)
                 .sourceRecordIds(new HashSet<>(Arrays.asList("source-1", "source-2")))
